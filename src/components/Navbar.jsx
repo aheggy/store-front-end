@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
     Disclosure,
     DisclosureButton,
@@ -17,10 +18,10 @@ import {
   
   const navigation = [
     // { name: 'Home', href: '#', current: true },
-    { name: 'Shop', href: '#', current: false },
+    { name: 'Shop', href: '/shop', current: false },
     // { name: 'Collections', href: '#', current: false },
     // { name: 'About Us', href: '#', current: false },
-    { name: 'Contact', href: '#', current: false },
+    { name: 'Contact', href: '/contact', current: false },
   ]
   
   function classNames(...classes) {
@@ -68,13 +69,10 @@ import {
               </div>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center gap-3 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div className="hidden md:block relative w-64 mr-4">
-                <input
-                    type="text"
-                    placeholder="Search perfumes..."
-                    className="w-full rounded-md bg-gray-700 text-white px-4 py-2 pr-10 focus:outline-none focus:ring focus:ring-white"
-                />
-                <MagnifyingGlassIcon className="absolute right-3 top-1/2 h-5 w-5 text-gray-400 transform -translate-y-1/2 pointer-events-none" />
+                <div className="hidden md:block relative mr-3">
+                  <MagnifyingGlassIcon
+                    className="h-6 w-6 text-gray-400 hover:text-white cursor-pointer"
+                  />            
                 </div>
   
               <button
