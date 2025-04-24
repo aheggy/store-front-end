@@ -44,9 +44,9 @@ import {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex shrink-0 items-center">
-                <h1 className="text-2xl font-extrabold text-white" style={{ fontFamily: 'Dancing Script, cursive' }}>
+                <Link to="/" className="text-2xl font-extrabold text-white" style={{ fontFamily: 'Dancing Script, cursive' }}>
                   OudWind
-                </h1>
+                </Link>
               </div>
               <div className="hidden sm:ml-6 md:block px-8">
                 <div className="flex space-x-4">

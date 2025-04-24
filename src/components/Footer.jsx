@@ -11,6 +11,10 @@ export default function Footer() {
               OudWind
             </h1>
           </div>
+          
+            <div className="mt-8 text-center text-sm text-gray-400">
+            <p>© 2025 OudWind. All rights reserved.</p>
+            </div>
 
           {/* Navigation Links */}
           <div className="mt-4 sm:mt-0 flex space-x-3">
@@ -38,9 +42,6 @@ export default function Footer() {
           </div>
         </div> */}
 
-        <div className="mt-8 text-center text-sm text-gray-400">
-          <p>© 2025 OudWind. All rights reserved.</p>
-        </div>
       </div>
     </footer>
   );
