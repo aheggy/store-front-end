@@ -1,12 +1,16 @@
 import products from '../data/products';
 import ProductCard from '../components/ProductCard';
-import trending from '../data/trending'
 
 export default function Home() {
+  const trending = products.filter(product => product.trending);
+  const bestSellers = products.slice(0, 5); // Simulated for now
+  const womenProducts = products.filter(p => p.gender === 'women');
+  const menProducts = products.filter(p => p.gender === 'men');
+
   return (
     <div className="space-y-10">
 
-      {/* Categories */}
+      {/* Categories (functionality can be added later) */}
       <div className="flex justify-center gap-14 text-gray-700 font-medium text-large mt-2">
         <button>All</button>
         <button>Best Seller</button>
@@ -16,14 +20,12 @@ export default function Home() {
 
       {/* Trending Section */}
       <section className="px-4">
-        <h2 className="text-xl font-semibold mb-4">Trending</h2>
-
-        {/* Mobile scroll view / Desktop grid view */}
+        <h1 className="text-xl text-center font-semibold mb-4">Trending</h1>
         <div className="flex gap-6 overflow-x-auto sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible">
           {trending.map((product) => (
             <div
               key={product.id}
-              className="flex-shrink-0 sm:flex-shrink w-[300px] sm:w-auto"
+              className="flex-shrink-0 sm:flex-shrink w-[300px] sm:w-auto border"
             >
               <img
                 src={product.image}
@@ -35,36 +37,59 @@ export default function Home() {
         </div>
       </section>
 
+      <hr />
+
       {/* Best Seller Section */}
       <section className="px-4">
-        <h2 className="text-xl font-semibold mb-4">Best Seller</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {products.slice(0, 5).map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <h1 className="text-xl text-center font-semibold mb-4">Best Seller</h1>
+        <div className="flex gap-4 overflow-x-auto px-4">
+            {bestSellers.map((product) => (
+                <div
+                key={product.id}
+                className="flex-shrink-0 w-[350px] sm:w-[350px] md:w-[350px]"
+                >
+                <ProductCard product={product} />
+                </div>
+            ))}
+        </div>
+
+      </section>
+
+      <hr />
+
+      {/* Women's Products */}
+      <section className="px-4">
+        <h1 className="text-xl text-center font-semibold mb-4">Women's Perfume</h1>
+        <div className="flex gap-4 overflow-x-auto px-4">
+            {womenProducts.map((product) => (
+                <div
+                key={product.id}
+                className="flex-shrink-0 w-[350px] sm:w-[350px] md:w-[350px]"
+                >
+                <ProductCard product={product} />
+                </div>
+            ))}
         </div>
       </section>
 
-        {/* Best Seller Section */}
-        <section className="px-4">
-        <h2 className="text-xl font-semibold mb-4">Women's Best Seller</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {products.slice(0, 5).map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+      <hr />
+
+      {/* Men's Products */}
+      <section className="px-4">
+        <h1 className="text-xl text-center font-semibold mb-4">Men's Perfume</h1>
+        <div className="flex gap-4 overflow-x-auto px-4">
+            {menProducts.map((product) => (
+                <div
+                key={product.id}
+                className="flex-shrink-0 w-[350px] sm:w-[350px] md:w-[350px]"
+                >
+                <ProductCard product={product} />
+                </div>
+            ))}
         </div>
       </section>
 
-
-        {/* Best Seller Section */}
-        <section className="px-4">
-        <h2 className="text-xl font-semibold mb-4">Men's Best Seller</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {products.slice(0, 5).map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
+      <hr />
 
     </div>
   );
