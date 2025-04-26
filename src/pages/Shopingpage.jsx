@@ -1,16 +1,26 @@
-import products from '../data/products'
-import ProductCard from '../components/ProductCard'
+import { useQuery } from '../hooks/useQuery';
+import products from '../data/products';
+import ProductCard from '../components/ProductCard';
 
-export default function ShoppingPage() {
+export default function Shop() {
+  const query = useQuery();
+  const filter = query.get('filter');
+
+  let filteredProducts = products;
+  console.log({filter})
+  if (filter === 'bestSeller') {
+    filteredProducts = products.filter(p => p.bestSellar === true);
+  } else if (filter === 'women') {
+    filteredProducts = products.filter(p => p.gender === 'women');
+  } else if (filter === 'men') {
+    filteredProducts = products.filter(p => p.gender === 'men');
+  }
+
   return (
-    <div className="px-6 py-10 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-10">Shop Our Oud Collection</h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+    <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+      {filteredProducts.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </div>
-  )
+  );
 }

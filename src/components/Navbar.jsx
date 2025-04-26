@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   Disclosure,
   DisclosureButton,
@@ -23,11 +24,13 @@ export default function Navbar() {
         {/* Top Row — Logo, Search (on sm+), Cart, Profile */}
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
+          <Link to="/">
           <div className="flex items-center px-4">
             <h1 className="text-2xl font-extrabold text-white" style={{ fontFamily: 'Dancing Script, cursive' }}>
               OudWind
             </h1>
           </div>
+          </Link>
 
           {/* Search Input (centered on sm+) */}
           <div className="hidden sm:flex flex-1 justify-center px-4">

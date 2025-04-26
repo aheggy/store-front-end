@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import products from '../data/products';
-import ProductCard from '../components/ProductCard';
+import HomeProductCard from '../components/HomeProductCard';
 
 export default function Home() {
   const trending = products.filter(product => product.trending);
@@ -10,17 +11,9 @@ export default function Home() {
   return (
     <div className="space-y-10">
 
-      {/* Categories (functionality can be added later) */}
-      <div className="flex justify-center gap-14 text-gray-700 font-medium text-large mt-2">
-        <button>All</button>
-        <button>Best Seller</button>
-        <button>Women</button>
-        <button>Men</button>
-      </div>
-
       {/* Trending Section */}
       <section className="px-4">
-        <h1 className="text-xl text-center font-semibold mb-4">Trending</h1>
+        <h1 className="text-2xl text-center font-semibold mb-4">Trending</h1>
         <div className="flex gap-6 overflow-x-auto sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible">
           {trending.map((product) => (
             <div
@@ -41,14 +34,15 @@ export default function Home() {
 
       {/* Best Seller Section */}
       <section className="px-4">
-        <h1 className="text-xl text-center font-semibold mb-4">Best Seller</h1>
-        <div className="flex gap-4 overflow-x-auto px-4">
+        <h1 className="text-2xl text-center font-semibold mb-4">Best Seller</h1>
+        <div className="flex gap-4 overflow-x-auto px-4 pb-6">
             {bestSellers.map((product) => (
                 <div
                 key={product.id}
-                className="flex-shrink-0 w-[350px] sm:w-[350px] md:w-[350px]"
+                    // className="flex-shrink-0 w-[350px] sm:w-[350px] md:w-[350px]"
+                    className="flex-shrink-0 w-[250px] sm:w-[250px] md:w-[250px]"
                 >
-                <ProductCard product={product} />
+                <HomeProductCard product={product} />
                 </div>
             ))}
         </div>
@@ -59,14 +53,14 @@ export default function Home() {
 
       {/* Women's Products */}
       <section className="px-4">
-        <h1 className="text-xl text-center font-semibold mb-4">Women's Perfume</h1>
-        <div className="flex gap-4 overflow-x-auto px-4">
+        <h1 className="text-2xl text-center font-semibold mb-4">Women's Best Seller</h1>
+        <div className="flex gap-4 overflow-x-auto px-4 pb-6">
             {womenProducts.map((product) => (
                 <div
                 key={product.id}
-                className="flex-shrink-0 w-[350px] sm:w-[350px] md:w-[350px]"
+                className="flex-shrink-0 w-[250px] sm:w-[250px] md:w-[250px]"
                 >
-                <ProductCard product={product} />
+                <HomeProductCard product={product} />
                 </div>
             ))}
         </div>
@@ -76,14 +70,14 @@ export default function Home() {
 
       {/* Men's Products */}
       <section className="px-4">
-        <h1 className="text-xl text-center font-semibold mb-4">Men's Perfume</h1>
-        <div className="flex gap-4 overflow-x-auto px-4">
+        <h1 className="text-2xl text-center font-semibold mb-4">Men's Best Seller</h1>
+        <div className="flex gap-4 overflow-x-auto px-4 pb-6">
             {menProducts.map((product) => (
                 <div
                 key={product.id}
-                className="flex-shrink-0 w-[350px] sm:w-[350px] md:w-[350px]"
+                className="flex-shrink-0 w-[250px] sm:w-[250px] md:w-[250px]"
                 >
-                <ProductCard product={product} />
+                <HomeProductCard product={product} />
                 </div>
             ))}
         </div>
