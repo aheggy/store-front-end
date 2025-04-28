@@ -8,13 +8,13 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className="relative bg-white rounded-lg overflow-hidden max-w-xs group hover:shadow-xl transition">
+    <div className="bg-white rounded-lg overflow-hidden flex flex-col group hover:shadow-lg transition">
       {/* Image section */}
       <div className="relative overflow-hidden">
         <img 
           src={product.image} 
           alt={product.name} 
-          className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-[200px] object-contain p-4"
         />
 
         {/* Button slides up from bottom on hover */}
