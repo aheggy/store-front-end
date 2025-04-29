@@ -10,6 +10,7 @@ export default function Home() {
 
   return (
     <div className="space-y-10">
+        
 
       {/* Trending Section */}
       <section className="px-4">

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import CategoryTabs from './components/CategoryTabs';
 import Home from './pages/Home';
+import SiteBanner from './components/SiteBanner';
 import ShoppingPage from './pages/Shopingpage';
 import ProductDetails from './pages/ProductDetails';
 import CartPage from './pages/CartPage';
@@ -13,6 +14,7 @@ function App() {
     <Router>
       <div className='min-h-screen flex flex-col'>
       <Navbar />
+      <SiteBanner />
       <CategoryTabs />
       <main className="p-4 flex-grow bg-gray-100">
         <Routes>
