@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import products from '../data/products';
+import { useCart } from '../context/CartContext';
 
 export default function ProductDetails() {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
+  const {addToCart} = useCart()
 
   const product = products.find(p => p.id.toString() === id);
 
@@ -16,7 +18,7 @@ export default function ProductDetails() {
   const handleDecrease = () => setQuantity(q => (q > 1 ? q - 1 : 1));
 
   return (
-    <div className="max-w-6xl mx-auto p-6 md:p-12 flex flex-col md:flex-row gap-12">
+    <div className="max-w-6xl mx-auto p-6 md:p-12 flex flex-col md:flex-row gap-6">
       
       {/* LEFT - Product Image */}
       <div className="flex-1 flex flex-col items-center">
@@ -36,11 +38,12 @@ export default function ProductDetails() {
       <div className="flex-1 space-y-6">
         <div className="space-y-2">
           <h2 className="text-3xl font-bold">{product.name}</h2>
+            {/* Short Description */}
+            <p className="text-gray-700">{product.description}</p>
           <p className="text-2xl text-gray-800">${product.price.toFixed(2)}</p>
-          <p className="text-sm text-gray-500">BARCODE: {product.barcode || "N/A"}</p>
         </div>
 
-        {/* Size */}
+        {/* Size */}    
         <div>
           <label className="block mb-1 font-semibold">Size:</label>
           <select className="border rounded p-2 w-full max-w-sm">
@@ -50,7 +53,7 @@ export default function ProductDetails() {
         </div>
 
         {/* Quantity */}
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="flex items-center border rounded overflow-hidden">
             <button
               onClick={handleDecrease}
@@ -67,18 +70,18 @@ export default function ProductDetails() {
             </button>
           </div>
 
-          <button className="bg-blue-800 w-md text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-500 transition">
+          <button 
+          onClick={()=> addToCart(product, quantity)}
+          className="bg-blue-800 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-500 transition w-full sm:w-auto">
             ADD TO CART
           </button>
         </div>
 
-        {/* Short Description */}
-        <p className="text-gray-700">{product.description}</p>
 
         {/* Collapsible Sections */}
-        <div className="mt-8 space-y-4">
-          <details className="border p-4 rounded cursor-pointer">
-            <summary className="font-bold text-sm">PRODUCT DETAILS</summary>
+        {/* <div className="mt-8 space-y-4">
+          <details className="p-4 rounded">
+            <p className="font-bold text-sm">Product Description</p>
             <p className="mt-2 text-gray-600">Details about the product...</p>
           </details>
 
@@ -91,7 +94,7 @@ export default function ProductDetails() {
             <summary className="font-bold text-sm">INGREDIENTS</summary>
             <p className="mt-2 text-gray-600">Ingredients list...</p>
           </details>
-        </div>
+        </div> */}
       </div>
     </div>
   );

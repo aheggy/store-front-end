@@ -14,11 +14,11 @@ export default function Home() {
       {/* Trending Section */}
       <section className="px-4">
         <h1 className="text-2xl text-center font-semibold mb-4">Trending</h1>
-        <div className="flex gap-6 overflow-x-auto sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible">
+        <div className="flex gap-6 overflow-x-auto sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible">
           {trending.map((product) => (
             <div
               key={product.id}
-              className="flex-shrink-0 sm:flex-shrink w-[300px] sm:w-auto border"
+              className="flex-shrink-0 sm:flex-shrink w-[300px] sm:w-auto"
             >
               <img
                 src={product.image}

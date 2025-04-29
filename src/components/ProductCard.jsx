@@ -8,7 +8,7 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden flex flex-col group hover:shadow-lg transition min-h-[280px]">
+    <div className="bg-white rounded-lg overflow-hidden flex flex-col group hover:shadow-lg transition min-h-[265px]">
       {/* Image section */}
       <div className="relative overflow-hidden">
         <img 

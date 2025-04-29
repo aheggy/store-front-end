@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 import {
   Disclosure,
   DisclosureButton,
@@ -7,32 +8,36 @@ import {
   MenuButton,
   MenuItem,
   MenuItems,
-} from '@headlessui/react'
+} from '@headlessui/react';
 import {
   ShoppingCartIcon,
   UserIcon,
-} from '@heroicons/react/24/outline'
+} from '@heroicons/react/24/outline';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar() {
+  const { cart } = useCart();
+
+  // Calculate total quantity of items
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       <div className="mx-auto max-w-9xl px-2 sm:px-6 lg:px-8">
-        {/* Top Row — Logo, Search (on sm+), Cart, Profile */}
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/">
-          <div className="flex items-center px-4">
-            <h1 className="text-2xl font-extrabold text-white" style={{ fontFamily: 'Dancing Script, cursive' }}>
-              OudWind
-            </h1>
-          </div>
+            <div className="flex items-center px-4">
+              <h1 className="text-2xl font-extrabold text-white" style={{ fontFamily: 'Dancing Script, cursive' }}>
+                OudWind
+              </h1>
+            </div>
           </Link>
 
-          {/* Search Input (centered on sm+) */}
+          {/* Search Input */}
           <div className="hidden sm:flex flex-1 justify-center px-4">
             <input
               type="text"
@@ -43,13 +48,17 @@ export default function Navbar() {
 
           {/* Icons */}
           <div className="flex items-center gap-3 pr-2">
-            <button
-              type="button"
-              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-            >
+            {/* Cart */}
+            <Link to="/cart" className="relative">
               <ShoppingCartIcon className="h-8 w-auto text-gray-400 hover:text-white" />
-            </button>
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
 
+            {/* Profile */}
             <Menu as="div" className="relative ml-3">
               <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <UserIcon className="h-8 w-auto text-gray-400" />
@@ -75,7 +84,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Second Row: Search bar on mobile (shown only on small screens) */}
+        {/* Mobile Search */}
         <div className="flex sm:hidden items-center justify-center py-2">
           <input
             type="text"
