@@ -10,9 +10,10 @@ import Footer from './components/Footer';
 function App() {
   return (
     <Router>
+      <div className='min-h-screen flex flex-col'>
       <Navbar />
       <CategoryTabs />
-      <main className="p-4">
+      <main className="p-4 flex-grow bg-gray-100">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<ShoppingPage />} />
@@ -20,6 +21,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+    </div>
     </Router>
   );
 }
