@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import products from '../data/products'; // Make sure this file exists and exports an array
 import {
   Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Menu,
   MenuButton,
   MenuItem,
@@ -20,9 +20,24 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const { cart } = useCart();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filtered, setFiltered] = useState([]);
 
-  // Calculate total quantity of items
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    const results = products.filter((p) =>
+      p.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFiltered(value.length > 0 ? results.slice(0, 5) : []);
+  };
+
+  const clearSearch = () => {
+    setSearchTerm('');
+    setFiltered([]);
+  };
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -37,13 +52,33 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Search Input */}
-          <div className="hidden sm:flex flex-1 justify-center px-4">
+          {/* Search Input Desktop */}
+          <div className="hidden sm:flex flex-1 justify-center px-4 relative">
             <input
               type="text"
               placeholder="Search products..."
+              value={searchTerm}
+              onChange={handleSearchChange}
               className="w-full max-w-2xl rounded-full border border-gray-300 bg-white py-2 px-6 text-sm focus:outline-none focus:ring-2 focus:ring-white"
             />
+            {filtered.length > 0 && (
+              <div className="absolute top-full mt-1 w-full max-w-2xl bg-white border border-gray-300 rounded-md shadow-lg z-50">
+                <ul className="divide-y divide-gray-200">
+                  {filtered.map((product) => (
+                    <li key={product.id}>
+                      <Link
+                        to={`/products/${product.id}`}
+                        className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
+                        onClick={clearSearch}
+                      >
+                        <img src={product.image} alt={product.name} className="w-10 h-10 object-cover rounded" />
+                        <span className="text-sm text-gray-800">{product.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* Icons */}
@@ -84,13 +119,33 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Search */}
-        <div className="flex sm:hidden items-center justify-center py-2">
+        {/* Mobile Search Input */}
+        <div className="flex sm:hidden items-center justify-center py-2 relative">
           <input
             type="text"
             placeholder="Search products..."
+            value={searchTerm}
+            onChange={handleSearchChange}
             className="w-full max-w-md rounded-full border border-gray-300 bg-white py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-white"
           />
+          {filtered.length > 0 && (
+            <div className="absolute top-full mt-1 w-full max-w-md bg-white border border-gray-300 rounded-md shadow-lg z-50">
+              <ul className="divide-y divide-gray-200">
+                {filtered.map((product) => (
+                  <li key={product.id}>
+                    <Link
+                      to={`/products/${product.id}`}
+                      className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
+                      onClick={clearSearch}
+                    >
+                      <img src={product.image} alt={product.name} className="w-10 h-10 object-cover rounded" />
+                      <span className="text-sm text-gray-800">{product.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </Disclosure>
