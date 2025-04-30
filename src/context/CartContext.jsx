@@ -15,8 +15,24 @@ const cartReducer = (state, action) => {
       } else {
         return [...state, action.payload];
       }
+
     case 'REMOVE_FROM_CART':
       return state.filter(item => item.id !== action.payload);
+
+    case 'INCREMENT_QUANTITY':
+      return state.map(item =>
+        item.id === action.payload
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+
+    case 'DECREMENT_QUANTITY':
+      return state.map(item =>
+        item.id === action.payload && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      );
+
     default:
       return state;
   }
@@ -33,14 +49,27 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (id) => {
-    dispatch({
-      type: 'REMOVE_FROM_CART',
-      payload: id,
-    });
+    dispatch({ type: 'REMOVE_FROM_CART', payload: id });
+  };
+
+  const incrementQuantity = (id) => {
+    dispatch({ type: 'INCREMENT_QUANTITY', payload: id });
+  };
+
+  const decrementQuantity = (id) => {
+    dispatch({ type: 'DECREMENT_QUANTITY', payload: id });
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        incrementQuantity,
+        decrementQuantity,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -10,6 +10,7 @@ import CartPage from './pages/CartPage';
 import Footer from './components/Footer';
 
 function App() {
+
   return (
     <Router>
       <div className='min-h-screen flex flex-col'>
