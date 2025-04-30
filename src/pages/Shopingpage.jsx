@@ -17,7 +17,7 @@ export default function Shop() {
   }
 
   return (
-    <div className="p-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-x-2 gap-y-2">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-x-2 gap-y-2">
       {filteredProducts.map(product => (
         <ProductCard 
         // className="h-full"
